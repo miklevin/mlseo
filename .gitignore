@@ -1,0 +1,9 @@
+.ipynb_checkpoints/
+__pycache__/
+*.swp
+*.swo
+Sort/*
+config/*
+data/*
+*.pkl
+*.db
