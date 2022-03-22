@@ -73,6 +73,7 @@ if is_jupyter:
     from IPython.display import display, Markdown, Audio, HTML
     from os import startfile as explore
 
+if is_jupyter and __name__ == '__main__':
     display(HTML("<h3>Continue running the cells.</h3>"))
 
 # Cell
@@ -920,11 +921,9 @@ def run_me(docs=False):
     console.print(rtab)
 
 
-if is_jupyter or __name__ != "__main__":
+if is_jupyter:
     h1("mlseo: Pythonic SEO in JupyterLab")
     h2("To begin: run_me()")
-
-if is_jupyter:
     msg = """The following few cells are set to ***Raw*** so that the code does not execute.
     If you want login early in the process, a beep or want some docs, change the respective
     cells to ***Code***."""
