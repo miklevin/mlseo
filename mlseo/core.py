@@ -921,7 +921,8 @@ def run_me(docs=False):
 if is_jupyter:
     h1("mlseo: Pythonic SEO in JupyterLab")
     h2("To begin: run_me()")
-    msg = """The following few cells are set to ***Raw*** so that the code does not execute.
-    If you want login early in the process, a beep or want some docs, change the respective
-    cells to ***Code***."""
-    display(Markdown(SPACES.sub(" ", msg)))
+    if __name__ == '__main__':
+        msg = """The following few cells are set to ***Raw*** so that the code does not execute.
+        If you want login early in the process, a beep or want some docs, change the respective
+        cells to ***Code***."""
+        display(Markdown(SPACES.sub(" ", msg)))
