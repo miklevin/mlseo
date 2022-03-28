@@ -5,7 +5,6 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"display": "00_core.ipynb",
          "Markdown": "00_core.ipynb",
          "Audio": "00_core.ipynb",
-         "explore": "00_core.ipynb",
          "async_get_responses": "00_core.ipynb",
          "beep": "00_core.ipynb",
          "fig": "00_core.ipynb",
