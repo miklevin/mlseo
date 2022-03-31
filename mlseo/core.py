@@ -813,7 +813,7 @@ def extract_serps(text):
 async def chrome(url, headless=False):
     Resp = namedtuple("Resp", "url, text, status_code, headers")
     chrome_exe = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-    user_data = r"C:\Users\mikle\AppData\Local\Google\Chrome\User Data"
+    user_data = r"%userprofile%\AppData\Local\Google\Chrome\User Data"
 
     browser = await launch(
         autoClose=False,
@@ -915,7 +915,7 @@ def run_me(docs=False):
 
     table_width = label_width + desc_width
     console = Console(theme=ct, width=table_width)
-    console.print(rtab)
+    # console.print(rtab)
 
 
 if is_jupyter:

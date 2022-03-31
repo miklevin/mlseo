@@ -31,7 +31,15 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://github.com/jupyterlab/jupyterlab-desktop">JupyterLab</a> standalone version is your "platform". Python is your framework. Pandas and Sqlite are your database. This package just adds some SEO functions and inspiration. Feel free to pip install it, but clone it from Github if you want the example Notebooks.</p>
+<p>This package contains a variety of building-blocks for constructing "deliverables" for the field of Search Engine Optimization (SEO). The goal is to make expressing such deliverables "light and breezy". For example, to crawl 1-page of a site into a local database:</p>
+
+<pre><code>from sqlitedict import SqliteDict as sqldict
+import requests
+
+key = 'https://mikelev.in/'
+with sqldict('crawl.db') as db:
+    db[key] = requests.get(key)
+    db.commit()</code></pre>
 
 </div>
 </div>
@@ -44,32 +52,26 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>pip install mlseo</code></p>
+<p><code>pip install -U mlseo</code></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Start a new Notebook, preferably in standalone JupyterLab. Then type:</p>
+<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use"> </a></h2><p>Start a new Notebook, preferably in standalone JupyterLab. Then type:</p>
 
 <pre><code>from mlseo import *
 
 </code></pre>
 <p>Then follow the instructions.</p>
+<h2 id="Standalone-JupyterLab">Standalone JupyterLab<a class="anchor-link" href="#Standalone-JupyterLab"> </a></h2><p>I also recommend installing nbdev and nb_black if you're doing any development work inside Jupyter:</p>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Bonus-Feature">Bonus Feature<a class="anchor-link" href="#Bonus-Feature"> </a></h1><p>mlseo is designed to be used in stand-alone JupyterLab. As such, you have to reconfigure it every time you reinstall/update. That's a pain. The biggest pain is putting your keyboard shortcuts back in. Here's mine:</p>
+<pre><code>pip install nb_black
+pip install nbdev
+
+</code></pre>
+<p>Standalone Jupyter changes a lot wiping out settings. Shortcuts are the hardest ones to get back, so here's mine. It's always a good time to restart kernel and clear all outputs.</p>
 
 <pre><code>{
     "shortcuts": [

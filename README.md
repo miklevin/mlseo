@@ -2,11 +2,19 @@
 > Pythonic SEO in JupyterLab
 
 
-<a href="https://github.com/jupyterlab/jupyterlab-desktop">JupyterLab</a> standalone version is your "platform". Python is your framework. Pandas and Sqlite are your database. This package just adds some SEO functions and inspiration. Feel free to pip install it, but clone it from Github if you want the example Notebooks.
+This package contains a variety of building-blocks for constructing "deliverables" for the field of Search Engine Optimization (SEO). The goal is to make expressing such deliverables "light and breezy". For example, to crawl 1-page of a site into a local database:
+
+    from sqlitedict import SqliteDict as sqldict
+    import requests
+    
+    key = 'https://mikelev.in/'
+    with sqldict('crawl.db') as db:
+        db[key] = requests.get(key)
+        db.commit()
 
 ## Install
 
-`pip install mlseo`
+`pip install -U mlseo`
 
 ## How to use
 
@@ -16,9 +24,14 @@ Start a new Notebook, preferably in standalone JupyterLab. Then type:
     
 Then follow the instructions.
 
-# Bonus Feature
+## Standalone JupyterLab
 
-mlseo is designed to be used in stand-alone JupyterLab. As such, you have to reconfigure it every time you reinstall/update. That's a pain. The biggest pain is putting your keyboard shortcuts back in. Here's mine:
+I also recommend installing nbdev and nb_black if you're doing any development work inside Jupyter:
+
+    pip install nb_black
+    pip install nbdev
+    
+Standalone Jupyter changes a lot wiping out settings. Shortcuts are the hardest ones to get back, so here's mine. It's always a good time to restart kernel and clear all outputs.
 
     {
         "shortcuts": [
@@ -31,3 +44,4 @@ mlseo is designed to be used in stand-alone JupyterLab. As such, you have to rec
             }
         ]
     }
+
