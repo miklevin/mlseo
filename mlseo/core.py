@@ -151,7 +151,9 @@ def fig(text):
         h1("Well done!")
         h2("You'll be an SEO in no time.")
         msg = f"""From this point on you will have to enter multiple lines of text for
-        each example so that it can prompt you to the next step."""
+        each example so that it can prompt you to the next step. When you copy/paste text
+        be careful to maintain indents consistent with the example. You can select all
+        text in a Code block and Tab or Shift+Tab to shift text left or right."""
         print(SPACES.sub(" ", msg))
         msg2 = f"""
     import httpx
@@ -782,7 +784,6 @@ def config2dict(fname):
     return rv
 
 
-#
 def build_google_search_query(keyword, site=None, num=10):
     """Return a URL that will perform a Google search for given keyword and optional site.
     Useful for scraping Google search results."""
@@ -1002,8 +1003,8 @@ def please_explain():
     msg2 = """
     1. A package called <a href="https://pypi.org/project/sqlitedict/">sqlitedict</a> has been pip installed on your computer as part of the mlseo dependencies.
     1. During the import, we are ***renaming*** sqlitedict.SqliteDict to just sqldict.
-    1. The **"with"** keyword means Python **CLOSES** the database on the **out-dent** using the context manager which spares us from looking at some ugly try/finally code.
     1. The **db** object is actually the SQLite database ***pretending to be a standard dict***.
+    1. The **"with"** keyword means Python **CLOSES** the database on the **out-dent** using the context manager which spares us from looking at some ugly try/finally code.
     1. This has the effect of making the dictionary **PERSISTENT** so we can get the value again without re-crawling the site.
     1. This is often done with Python pickles, but using SQLite is **MUCH** faster.
     1. The **string** contents of the url variable is being used as a dictionary key.
