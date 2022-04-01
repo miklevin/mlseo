@@ -6,9 +6,9 @@ __all__ = ['display', 'Markdown', 'Audio', 'first_run', 'async_get_responses', '
            'extract_url_keywords', 'extract_keywords', 'gsc_guess_site', 'gsc_url2keyword_query', 'gsc_url_query',
            'gsc2df', 'df_allout', 'ga_accounts', 'ga_properties', 'ga_properties_g4', 'ga_profiles', 'ga_everything',
            'inspect_url', 'drop_table', 'pk_compositor', 'pk_inserter', 'config2dict', 'build_google_search_query',
-           'extract_serps', 'chrome', 'run_me', 'look', 'all_docs', 'enlighten_me', 'save_me', 'please_explain', 'bs',
-           'lr', 'SPACES', 'LINES', 'pstem', 'stop_words', 'pkl', 'unpkl', 'svc_ga', 'svc_ga4', 'svc_gsc', 'svc_mail',
-           'svc_oauth', 'svc_sheet', 'svc_photo', 'svc_youtube']
+           'extract_serps', 'chrome', 'run_me', 'look', 'show_globals', 'enlighten_me', 'save_me', 'please_explain',
+           'bs', 'lr', 'SPACES', 'LINES', 'pstem', 'stop_words', 'pkl', 'unpkl', 'svc_ga', 'svc_ga4', 'svc_gsc',
+           'svc_mail', 'svc_oauth', 'svc_sheet', 'svc_photo', 'svc_youtube', 'url', 'response']
 
 # Cell
 
@@ -153,17 +153,25 @@ def fig(text):
         msg = f"""From this point on you will have to enter multiple lines of text for
         each example so that it can prompt you to the next step. When you copy/paste text
         be careful to maintain indents consistent with the example. You can select all
-        text in a Code block and Tab or Shift+Tab to shift text left or right."""
-        print(SPACES.sub(" ", msg))
-        msg2 = f"""
-    import httpx
+        text in a Code block and Tab or Shift+Tab to shift text left or right. Also you
+        can learn about the <a href="https://pypi.org/project/art/">art</a> package
+        that makes the cool text (and much more)."""
+        display(Markdown(SPACES.sub(" ", msg)))
+        print()
+        display(
+            Markdown(
+                """
+```python
+import httpx
 
-    url = "https://mikelev.in/"
-    response = httpx.get(url)
+url = "https://mikelev.in/"
+response = httpx.get(url)
 
-    enlighten_me()
-    """
-        print(msg2)
+enlighten_me()
+```"""
+            )
+        )
+        print()
 
 
 def h1(text):
@@ -878,7 +886,7 @@ def look():
     print(SPACES.sub(" ", msg))
 
 
-def all_docs(docs=False):
+def show_globals(docs=False):
     """Print every publlic function and object in global namespace with their
     API signatures. Optionally display their docstrings."""
     label_width = 30
@@ -967,31 +975,43 @@ def enlighten_me():
     print(response.text) is the HTML of the page and will be very long. You can delete that
     block or hide the output after you've looked at it."""
     display(Markdown(SPACES.sub(" ", msg)))
-    msg2 = """
-    print(response)
-    type(response)
-    dir(response)
-    print(response.text)
+    print()
+    display(
+        Markdown(
+            """
+```python
+print(response)
+type(response)
+dir(response)
+print(response.text)
 
-    save_me()"""
-    print(msg2)
+save_me()
+```"""
+        )
+    )
+    print()
 
 
 def save_me():
     h1("Wonderful!")
-    msg = """It's time to put the response **object** onto the drive so you can retreive
-    it again later without re-crawling the site. Run these lines of code. You will see
-    a file named **crawl.db** appear in the same folder as your Notebook."""
+    msg = """Now let's store the **response** in a database on your drive. Copy this code exactly (watch indenting) into the Code block below."""
     display(Markdown(SPACES.sub(" ", msg)))
-    msg2 = """
-    from sqlitedict import SqliteDict as sqldict
+    print()
+    display(
+        Markdown(
+            """
+```python
+from sqlitedict import SqliteDict as sqldict
 
-    with sqldict("crawl.db") as db:
-        db[url] = response
-        db.commit()
+with sqldict("crawl.db") as db:
+    db[url] = response
+    db.commit()
 
-    please_explain()"""
-    print(msg2)
+please_explain()
+```"""
+        )
+    )
+    print()
 
 
 def please_explain():
@@ -1009,7 +1029,7 @@ def please_explain():
     1. This is often done with Python pickles, but using SQLite is **MUCH** faster.
     1. The **string** contents of the url variable is being used as a dictionary key.
     1. The entire httpx.Response object is being used as a dictionary value.
-    1. The changes made to the **db** object must be ***committed*** to the file.
+    1. The changes made to the **db** object must be ***committed*** to the file with db.commit().
     1. Using SQLite for persistent dicts is beyond useful.
     """
     display(Markdown(LINES.sub(" ", msg2)))

@@ -48,7 +48,7 @@ index = {"display": "00_core.ipynb",
          "chrome": "00_core.ipynb",
          "run_me": "00_core.ipynb",
          "look": "00_core.ipynb",
-         "all_docs": "00_core.ipynb",
+         "show_globals": "00_core.ipynb",
          "enlighten_me": "00_core.ipynb",
          "save_me": "00_core.ipynb",
          "please_explain": "00_core.ipynb",
@@ -67,7 +67,9 @@ index = {"display": "00_core.ipynb",
          "svc_oauth": "00_core.ipynb",
          "svc_sheet": "00_core.ipynb",
          "svc_photo": "00_core.ipynb",
-         "svc_youtube": "00_core.ipynb"}
+         "svc_youtube": "00_core.ipynb",
+         "url": "00_core.ipynb",
+         "response": "00_core.ipynb"}
 
 modules = ["core.py"]
 
