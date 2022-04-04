@@ -8,7 +8,7 @@ __all__ = ['display', 'Markdown', 'Audio', 'first_run', 'async_get_responses', '
            'inspect_url', 'drop_table', 'pk_compositor', 'pk_inserter', 'config2dict', 'build_google_search_query',
            'extract_serps', 'chrome', 'run_me', 'look', 'show_globals', 'enlighten_me', 'save_me', 'please_explain',
            'bs', 'lr', 'SPACES', 'LINES', 'pstem', 'stop_words', 'pkl', 'unpkl', 'svc_ga', 'svc_ga4', 'svc_gsc',
-           'svc_mail', 'svc_oauth', 'svc_sheet', 'svc_photo', 'svc_youtube', 'url', 'response']
+           'svc_mail', 'svc_oauth', 'svc_sheet', 'svc_photo', 'svc_youtube']
 
 # Cell
 
@@ -161,14 +161,14 @@ def fig(text):
         display(
             Markdown(
                 """
-```python
-import httpx
-
-url = "https://mikelev.in/"
-response = httpx.get(url)
-
-enlighten_me()
-```"""
+# ```python
+# import httpx
+# 
+# url = "https://mikelev.in/"
+# response = httpx.get(url)
+# 
+# enlighten_me()
+# ```"""
             )
         )
         print()
