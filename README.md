@@ -18,7 +18,7 @@ Chase the rabbit.
 
 # The Gist of mlseo
 
-This is NOT an SEO Software Suite of the sort that automatically sets up webserver user interfaces for you. This is completely the opposite. This package contains a grab-bag of building-blocks useful for constructing "deliverables" for the field of Search Engine Optimization (SEO), and tries to entice you into it.
+This is NOT an SEO Software Suite of the sort that automatically sets up webserver user interfaces for you. This is completely the opposite. This package contains a grab-bag of building-blocks useful for constructing "deliverables" for the field of Search Engine Optimization (SEO), and tries to entice you into coding some Python in JupyterLab Desktop.
 
 ## Light & Breezy Python
 
@@ -52,11 +52,12 @@ atuple = (date.today(), url, True)
 
 ### Pickling and Unpickling
 
-The way tuples become string keys (necessary for sqlitedict) is by a common Python serialization function called ***pickling. We "pickle" the tuple to make it a string-based dictionary key. We can then iterate through all keys, unpickling the primary key and have it back in its orginal tuple-state as we go.
+The way tuples become string keys (necessary for sqlitedict) is by a common Python serialization function called ***pickling***. We "pickle" the tuple to make it a string-based dictionary key. We can then iterate through all keys, unpickling the primary key and have it back in its orginal tuple-state as we go.
 
 ```python
 import pickle
 from datetime import date
+
 
 pkl = lambda x: pickle.dumps(x)
 unpkl = lambda x: pickle.loads(x)
@@ -67,12 +68,11 @@ today = date.today()
 atuple = (today, url, True)
 now_a_string = pkl(atuple)
 
-print(now_a_string)
-b'\x80\x04\x959\x00\x00\x00\x00\x00\x00\x00\x8c\x08datetime\x94\x8c\x04date\x94\x93\x94C\x04\x07\xe6\x04\x04\x94\x85\x94R\x94\x8c\x13https://mikelev.in/\x94\x88\x87\x94.'
 
+print(now_a_string)
+> >>b'\x80\x04\x959\x00\x00\x00\x00\x00\x00\x00\x8c\x08datetime\x94\x8c\x04date\x94\x93\x94C\x04\x07\xe6\x04\x04\x94\x85\x94R\x94\x8c\x13https://mikelev.in/\x94\x88\x87\x94.'
 print(unpkl(now_a_string))
-(datetime.date(2022, 4, 4), 'https://mikelev.in/', True)
-```
+> >>(datetime.date(2022, 4, 4), 'https://mikelev.in/', True)```
 
 ### Pickling Keys For Database
 

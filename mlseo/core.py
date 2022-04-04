@@ -8,7 +8,7 @@ __all__ = ['display', 'Markdown', 'Audio', 'first_run', 'async_get_responses', '
            'inspect_url', 'drop_table', 'pk_compositor', 'pk_inserter', 'config2dict', 'build_google_search_query',
            'extract_serps', 'chrome', 'run_me', 'look', 'show_globals', 'enlighten_me', 'save_me', 'please_explain',
            'bs', 'lr', 'SPACES', 'LINES', 'pstem', 'stop_words', 'pkl', 'unpkl', 'svc_ga', 'svc_ga4', 'svc_gsc',
-           'svc_mail', 'svc_oauth', 'svc_sheet', 'svc_photo', 'svc_youtube']
+           'svc_mail', 'svc_oauth', 'svc_sheet', 'svc_photo', 'svc_youtube', 'url', 'response']
 
 # Cell
 
@@ -161,14 +161,14 @@ def fig(text):
         display(
             Markdown(
                 """
-# ```python
-# import httpx
-# 
-# url = "https://mikelev.in/"
-# response = httpx.get(url)
-# 
-# enlighten_me()
-# ```"""
+```python
+import httpx
+
+url = "https://mikelev.in/"
+response = httpx.get(url)
+
+enlighten_me()
+```"""
             )
         )
         print()
@@ -1023,7 +1023,7 @@ def please_explain():
     msg2 = """
     1. A package called <a href="https://pypi.org/project/sqlitedict/">sqlitedict</a> has been pip installed on your computer as part of the mlseo dependencies.
     1. During the import, we are ***renaming*** sqlitedict.SqliteDict to just sqldict.
-    1. The **db** object is actually the SQLite database ***pretending to be a standard dict***.
+    1. The **db** object is actually the SQLite database ***pretending to be a Python standard dictionary***.
     1. The **"with"** keyword means Python **CLOSES** the database on the **out-dent** using the context manager which spares us from looking at some ugly try/finally code.
     1. This has the effect of making the dictionary **PERSISTENT** so we can get the value again without re-crawling the site.
     1. This is often done with Python pickles, but using SQLite is **MUCH** faster.
