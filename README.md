@@ -107,7 +107,7 @@ with sqldict('crawl.db') as db:
 
 # From Here
 
-By following the install and how-to-use instructions above, you will be invited to run_me(), thereby initiating the example given here. Do the trick to get the trick. This is top-down education. \*POOF\* here's a gift. Now look at how that works.    
+By following the install and how-to-use instructions above, you will be invited to run_me(), thereby initiating the example given here.
 
 # A Word About JupyterLab
 
