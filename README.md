@@ -70,7 +70,7 @@ print(now_a_string)
 
 ### Pickling Keys For Database
 
-This example uses a pickled tuple containing the Date and the URL as the database key. It shows data both going in and coming out of the database. Notice the pickled key is restored to its original form. This approach prevents duplicate records in your database. Because dictionary keys must be unique, attempts to insert a new record with the same URL+Date key will fail, meaning this crawler can only record each page on the site once per day.
+This example uses a pickled tuple containing the Date and the URL as the database key. It shows data both going in and coming out of the database. Notice the pickled key is restored to its original form. This approach prevents duplicate records in your database. Because dictionary keys must be unique, attempts to insert a new record with the same URL+Date key will fail, meaning this crawler can only record each page on the site once per day. This is a good thing. It's what databases are for.
 
 ```python
 import httpx
@@ -97,6 +97,10 @@ with sqldict('crawl.db') as db:
         print(adate, url)
 ```
 
+# From Here
+
+At this point you should understand that we're using Python's built-in SQLite database like a standard Python key-value dictionary (dict) and that we are able to use pickled tuples as keys, which maintains data integrity because db keys must be unique. All mlseo projects build on this technique. You might like [DB Browser for SQLite](https://sqlitebrowser.org/)  to open and inspect the .db files another way. 
+
 # mlseo Tutorials
 
 [**HOUSEKEEPING:**](./housekeeping.ipynb) Once you have the basic trick of using a persistent dictionary and using tuples as your primary key, you'll need a place to ***put*** the database and all your other INPUT/OUTPUT files besides lumping it all into the top-level of your folder.
@@ -118,7 +122,7 @@ I also recommend installing nbdev and nb_black if you're doing any development w
 
 ### Restart Kernel & Clear All Outputs A LOT
 
-And lastly, shortcuts always get deleted between Jupyter reinstalls so here's my most important shortcut. It's always a good time to Restart kernel and clear all outputs.
+And lastly, shortcuts always get deleted between Jupyter re-installs so here's my most important shortcut. It's always a good time to Restart kernel and clear all outputs.
 ```javascript
 {
     "shortcuts": [
