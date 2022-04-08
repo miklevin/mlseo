@@ -13,22 +13,20 @@ Start a new Notebook, preferably in standalone JupyterLab. Then type:
 ```python
 from mlseo import *
 ```
-    
-Chase the rabbit.
 
-# The Gist of mlseo
 
-This is NOT an SEO Software Suite of the sort that automatically sets up webserver user interfaces for you. This is completely the opposite. This package contains a grab-bag of building-blocks useful for constructing "deliverables" for the field of Search Engine Optimization (SEO), and tries to entice you into coding some Python in JupyterLab Desktop.
+     Welcome to _                  (\         To chase the rabbit,
+      _ __ ___ | |___  ___  ___     \\_ _/(\      run: look()
+     | '_ ` _ \| / __|/ _ \/ _ \      0 0 _\)___
+     | | | | | | \__ \  __/ (_) |   =(_T_)=     )*
+     |_| |_| |_|_|___/\___|\___/      /"/   (  /
+               The adventure begins! <_<_/-<__|
 
-## Light & Breezy Python
+# The Most Important Things
 
-The goal is to make expressing such deliverables "light and breezy" by establishing certain good Python (Pythonic) conventions that you can use throrought your data-jockying career. The approach I'm about to show you is ***perfect*** for raw-data capture from API-calls, using the arguments of the API-call itself as the database-key to recover the locally stored response. If this sounds like gobbledygook to you right now, just bear with me. You'll get it.
+## Storing API Responses into Database
 
-## Best Technique You've Never Heard Of
-
-Use the exact values you fed to the API to fetch the data in the first place as the keys to your database to retreive the data again locally. I just boosted your earning-capacity x2 at least. SQLite3 (part of standard Python) is a gift. The dict API connected to it is a gift. The context-manager ("with *something* as *something*") is a gift. Use them.
-
-For example, to crawl 1-page of a site into a local database:
+This package contains a variety of building-blocks for constructing "deliverables" for the field of Search Engine Optimization (SEO). The goal is to make expressing such deliverables "light and breezy" by establishing certain conventions. For example, to crawl 1-page of a site into a local database:
 
 ```python
 import httpx
@@ -40,45 +38,39 @@ with sqldict('crawl.db') as db:
     db.commit()
 ```
 
-## Tuples As Composite-Keys (Unique Constraints)
-If the database key should also contain the **date** of the crawl and a full/partial boolean (True/False), we can use a 3-position tuple. This is better practice than appending strings together, because you can keep dates as real datetime objects and perform date operations on them easily when stepping through records.
+## Using Tuples As Composite-Keys
+
+We are using SQlite as a key-value database in a way that requires the keys to be strings. Keys must be unique so if we use the URL as the key we can store each page we crawl only once. Instead of just a URL, the key to your database can contain a URL and Date so that we can crawl sites on subsequent days and store it into the same key-value database. Such a tuple key looks like this:
 
 ```python
 from datetime import date
 
 url = 'https://mikelev.in/'
-atuple = (date.today(), url, True)
+atuple = (date.today(), url)
 ```
 
-### Pickling and Unpickling
+## Pickling and Unpickling
 
-The way tuples become string keys (necessary for sqlitedict) is by a common Python serialization function called ***pickling***. We "pickle" the tuple to make it a string-based dictionary key. We can then iterate through all keys, unpickling the primary key and have it back in its orginal tuple-state as we go.
+Tuples must become strings to be a key in the key-value database we're using. This is accomplished through ***pickling***. We "pickle" the tuple to make it a string, then can use that string as a key in the dictionary database.
 
 ```python
 import pickle
 from datetime import date
-
 
 pkl = lambda x: pickle.dumps(x)
 unpkl = lambda x: pickle.loads(x)
 
 url = 'https://mikelev.in/'
 today = date.today()
+atuple = (today, url)
 
-atuple = (today, url, True)
 now_a_string = pkl(atuple)
-
-
 print(now_a_string)
-b'\x80\x04\x959\x00\x00\x00\x00\x00\x00\x00\x8c\x08datetime\x94\x8c\x04date\x94\x93\x94C\x04\x07\xe6\x04\x04\x94\x85\x94R\x94\x8c\x13https://mikelev.in/\x94\x88\x87\x94.'
-
-print(unpkl(now_a_string))
-(datetime.date(2022, 4, 4), 'https://mikelev.in/', True)
 ```
 
 ### Pickling Keys For Database
 
-The example below puts the 2 above examples together to save the page-crawl to the database using a pickled tuple as the dictionary key. This is worth contemplating. Composite primary keys are unique constraints, thus naturally preventing duplicate redords from being recorded for the same URL for the same day. This sets the stage for efficient subsequent crawls.
+This example uses a pickled tuple containing the Date and the URL as the database key. It shows data both going in and coming out of the database. Notice the pickled key is restored to its original form. This approach prevents duplicate records in your database. Because dictionary keys must be unique, attempts to insert a new record with the same URL+Date key will fail, meaning this crawler can only record each page on the site once per day.
 
 ```python
 import httpx
@@ -94,37 +86,37 @@ url = 'https://mikelev.in/'
 
 # Data goes in
 with sqldict('crawl.db') as db:
-    tupkey = (date.today(), url, True)
+    tupkey = (date.today(), url)
     db[pkl(tupkey)] = httpx.get(url)
     db.commit()
 
 # Data comes out
 with sqldict('crawl.db') as db:
     for tupkey in db:
-        adate, url, full = unpkl(tupkey)
-        print(adate, url, full)
+        adate, url = unpkl(tupkey)
+        print(adate, url)
 ```
 
-# From Here
+# mlseo Tutorials
 
-By following the install and how-to-use instructions above, you will be invited to run_me(), thereby initiating the example given here.
+[**HOUSEKEEPING:**](./housekeeping.ipynb) Once you have the basic trick of using a persistent dictionary and using tuples as your primary key, you'll need a place to ***put*** the database and all your other INPUT/OUTPUT files besides lumping it all into the top-level of your folder.
 
-# A Word About JupyterLab
+## A Word About JupyterLab
 
-## Recovering pip installs
+### Recovering pip installs
 
 For now standalone Jupyter has to be reinstalled a lot and its easy to lose your pip-installed packages. For mlseo you can get all the necessary packages back by just typing this into a Code cell:
 
     pip install mlseo --upgrade
 
-## Useful Dev Tools
+### Useful Dev Tools
 
 I also recommend installing nbdev and nb_black if you're doing any development work inside Jupyter:
 
     pip install nb_black
     pip install nbdev
 
-## Restart Kernel & Clear All Outputs A LOT
+### Restart Kernel & Clear All Outputs A LOT
 
 And lastly, shortcuts always get deleted between Jupyter reinstalls so here's my most important shortcut. It's always a good time to Restart kernel and clear all outputs.
 ```javascript
