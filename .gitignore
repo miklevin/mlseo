@@ -7,3 +7,13 @@ config/*
 data/*
 *.pkl
 *.db
+.devcontainer.json
+.gitattributes
+.gitconfig
+.last_checked
+build/
+country_codes.txt
+dist/
+docker-compose.yml
+file_extensions.txt
+mlseo.egg-info/
