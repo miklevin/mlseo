@@ -136,17 +136,3 @@ And lastly, shortcuts always get deleted between Jupyter re-installs so here's m
     ]
 }
 ```
-
-
-```python
-!nb_nb2md('index.ipynb')
-```
-
-    'nb_nb2md' is not recognized as an internal or external command,
-    operable program or batch file.
-
-
-
-```python
-
-```
