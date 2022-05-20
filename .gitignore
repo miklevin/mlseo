@@ -12,7 +12,6 @@ data/*
 .gitconfig
 .last_checked
 build/
-country_codes.txt
 dist/
 docker-compose.yml
 file_extensions.txt
