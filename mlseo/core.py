@@ -6,9 +6,9 @@ __all__ = ['display', 'Markdown', 'Audio', 'first_run', 'beep', 'h1', 'h2', 'h3'
            'extract_keywords', 'gsc_guess_site', 'gsc_url2keyword_query', 'gsc_url_query', 'gsc2df', 'df_allout',
            'ga_accounts', 'ga_properties', 'ga_properties_g4', 'ga_profiles', 'ga_everything', 'inspect_url',
            'drop_table', 'pk_compositor', 'pk_inserter', 'config2dict', 'build_google_search_query', 'extract_serps',
-           'run_me', 'look', 'show_globals', 'enlighten_me', 'save_me', 'please_explain', 'bs', 'lr', 'SPACES', 'LINES',
-           'pstem', 'stop_words', 'pkl', 'unpkl', 'svc_ga', 'svc_ga4', 'svc_gsc', 'svc_mail', 'svc_oauth', 'svc_sheet',
-           'svc_photo', 'svc_youtube']
+           'run_me', 'look', 'show_globals', 'enlighten_me', 'save_me', 'please_explain', 'fig', 'bs', 'lr', 'SPACES',
+           'LINES', 'pstem', 'stop_words', 'pkl', 'unpkl', 'svc_ga', 'svc_ga4', 'svc_gsc', 'svc_mail', 'svc_oauth',
+           'svc_sheet', 'svc_photo', 'svc_youtube']
 
 # Cell
 
@@ -163,7 +163,7 @@ def from_file(file_name):
     Makes loading lists of keywords and URLs from file very easy."""
 
     rv = False
-    with open(file_name) as fh:
+    with open(file_name, encoding="utf-8") as fh:
         spotty = fh.read().split("\n")
     spotless = [x for x in spotty if x]
     if all(spotless):
@@ -775,14 +775,13 @@ def extract_serps(text):
     return rv
 
 
-
 def run_me():
     text = r""" Welcome to _                  (\         To chase the rabbit,
   _ __ ___ | |___  ___  ___     \\_ _/(\      run: look()
  | '_ ` _ \| / __|/ _ \/ _ \      0 0 _\)___
  | | | | | | \__ \  __/ (_) |   =(_T_)=     )*
  |_| |_| |_|_|___/\___|\___/      /"/   (  /
-           The adventure begins! <_<_/-<__|"""
+           The adventure begins! <_<_/-<__|     !!!!"""
     print(text)
 
 
@@ -948,3 +947,13 @@ def please_explain():
 if is_jupyter:
     h1("mlseo: Pythonic SEO in JupyterLab")
     h2("To begin: run_me()")
+
+
+def fig(text):
+    """Returns Figlet-style ASCII-art of input text for when h1's aren't big enough."""
+    if is_jupyter:
+        display(
+            HTML(
+                f'<pre style="white-space: pre;">{text2art(text).replace(lr, "<br/>")}</pre>'
+            )
+        )
